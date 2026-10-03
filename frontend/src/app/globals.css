@@ -1,0 +1,142 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-orange: #ea580c;
+  --brand-orange-light: #f97316;
+  --brand-navy: #0f172a;
+  --brand-charcoal: #1e293b;
+  --brand-cream: #faf7f2;
+  --brand-warm: #f5f0e8;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #1e293b;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+::selection { background: rgba(234, 88, 12, 0.15); color: #ea580c; }
+:focus-visible { outline: 2px solid #ea580c; outline-offset: 2px; }
+
+/* Hero overlay */
+.hero-overlay {
+  background: linear-gradient(165deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.35) 45%, rgba(15,23,42,0.65) 100%);
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.glass-dark {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -12px rgba(15,23,42,0.18);
+}
+
+/* Image zoom */
+.img-zoom { overflow: hidden; }
+.img-zoom img { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.img-zoom:hover img { transform: scale(1.06); }
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* Animate on load */
+.animate-on-load {
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .card-hover:hover { transform: none; }
+  .img-zoom:hover img { transform: none; }
+}
+
+/* Mobile nav */
+.mobile-nav-overlay { animation: fadeIn 0.2s ease-out; }
+
+/* Gradient text — text-shadow must be none to prevent bleed-through on webkit gradient clip */
+.gradient-text {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/* Section reveal */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.section-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* Badges / UI helpers */
+.badge-orange {
+  background: rgba(234,88,12,0.08);
+  border: 1px solid rgba(234,88,12,0.2);
+  color: #c2410c;
+}
+.input-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(234,88,12,0.12);
+  border-color: #ea580c;
+}
+.tab-active { border-bottom: 2px solid #ea580c; color: #ea580c; }
+.lokora-mark {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  box-shadow: 0 4px 14px rgba(234,88,12,0.3);
+}

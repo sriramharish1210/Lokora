@@ -1,0 +1,58 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Experience {
+  id              String          @id @default(cuid())
+  title           String
+  description     String
+  category        String
+  city            String
+  area            String          @default("")
+  latitude        Float
+  longitude       Float
+  durationMinutes Int
+  price           Float
+  isAvailable     Boolean         @default(true)
+  itineraryItems  ItineraryItem[]
+}
+
+model Itinerary {
+  id          String          @id @default(cuid())
+  destination String
+  startTime   String
+  endTime     String
+  budget      Float
+  preferences String          // JSON array stored as string
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  items       ItineraryItem[]
+  adaptations Adaptation[]
+}
+
+model ItineraryItem {
+  id            String     @id @default(cuid())
+  itineraryId   String
+  experienceId  String
+  startTime     String
+  endTime       String
+  travelMinutes Int        @default(0)
+  order         Int
+  itinerary     Itinerary  @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  experience    Experience @relation(fields: [experienceId], references: [id])
+}
+
+model Adaptation {
+  id          String    @id @default(cuid())
+  itineraryId String
+  type        String
+  reason      String
+  changes     String    // JSON stored as string
+  createdAt   DateTime  @default(now())
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+}
